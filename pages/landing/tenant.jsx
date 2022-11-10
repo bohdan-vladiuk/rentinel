@@ -5,8 +5,10 @@ function Tenant() {
   return (
     <Layout role={1}>
       <div className="container-fluid">
-        <h2>
-          This is <b>Tenant</b> Page
+        <h2 className="row text-center">
+          <p>
+            This is <b>Tenant</b> Page
+          </p>
         </h2>
       </div>
     </Layout>

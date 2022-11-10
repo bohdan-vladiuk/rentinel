@@ -13,10 +13,12 @@ function CreateProperty() {
     city: Yup.string().required("City is required"),
     country: Yup.string().required("Country is required"),
     zipcode: Yup.string().required("Zip Code is required"),
-    deposit: Yup.number().required("Deposit is required"),
-    rentAmount: Yup.number().required("Rent Amount is required"),
-    // startDate: Yup.date().required("Start Date is required"),
-    // endDate: Yup.date().required("End Date is required"),
+    deposit: Yup.number()
+      .typeError("Deposit must be a number")
+      .required("Deposit is required"),
+    rentAmount: Yup.number()
+      .typeError("Rent amount must be a number")
+      .required("Rent Amount is required"),
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
 
@@ -27,9 +29,10 @@ function CreateProperty() {
     return propertyService
       .create(property)
       .then(() => {
-        alertService.success("Property created successfully ", {
-          keepAfterRouteChange: true,
-        });
+        alert("Property created successfully.");
+        // alertService.success("Property created successfully ", {
+        //   keepAfterRouteChange: true,
+        // });
         // router.push("login");
       })
       .catch(alertService.error);
