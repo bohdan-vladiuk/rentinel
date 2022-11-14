@@ -1,9 +1,22 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  env: {
-    DB_LOCAL_URI: "mongodb://127.0.0.1:27017/rentinel",
-  },
-};
+/**
+ * @type {import('next').NextConfig}
+ */
 
-module.exports = nextConfig;
+/* eslint-disable @typescript-eslint/no-var-requires */
+const withTM = require('next-transpile-modules')([
+  '@babel/preset-react',
+  'react-syntax-highlighter',
+  'react-dnd',
+  'react-dnd-html5-backend'
+]);
+
+module.exports = withTM({
+  reactStrictMode: true,
+  images: {
+    domains: ['flagcdn.com']
+  },
+  env: {
+    REACT_APP_VERSION: process.env.REACT_APP_VERSION,
+    NEXTAUTH_URL: process.env.NEXTAUTH_URL
+  }
+});
