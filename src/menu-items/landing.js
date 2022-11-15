@@ -22,7 +22,7 @@ const landing = {
     },
     {
       id: 'landlord',
-      title: 'Lanlord',
+      title: 'Landlord',
       type: 'item',
       url: '/landing/landlord',
       icon: icons.HomeOutlined

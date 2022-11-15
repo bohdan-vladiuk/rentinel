@@ -117,14 +117,14 @@ const Header = ({ handleDrawerOpen, layout = 'landing', ...others }) => {
                   Components
                 </Link>
               </NextLink>
-              <Link className="header-link" color="white" href="https://codedthemes.gitbook.io/mantis/" target="_blank" underline="none">
+              <Link className="header-link" color="white" href="https://codedthemes.gitbook.io/rentinel/" target="_blank" underline="none">
                 Documentation
               </Link>
               <Box sx={{ display: 'inline-block' }}>
                 <AnimateButton>
                   <Button
                     component={Link}
-                    href="https://mui.com/store/items/mantis-react-admin-dashboard-template/"
+                    href="https://mui.com/store/items/rentinel-react-admin-dashboard-template/"
                     disableElevation
                     color="primary"
                     variant="contained"
@@ -206,7 +206,7 @@ const Header = ({ handleDrawerOpen, layout = 'landing', ...others }) => {
                     </Link>
                     <Link
                       style={{ textDecoration: 'none' }}
-                      href="https://github.com/codedthemes/mantis-free-react-admin-template"
+                      href="https://github.com/codedthemes/rentinel-free-react-admin-template"
                       target="_blank"
                     >
                       <ListItemButton component="span">
@@ -216,7 +216,7 @@ const Header = ({ handleDrawerOpen, layout = 'landing', ...others }) => {
                         <ListItemText primary="Free Version" primaryTypographyProps={{ variant: 'h6', color: 'text.primary' }} />
                       </ListItemButton>
                     </Link>
-                    <Link style={{ textDecoration: 'none' }} href="https://codedthemes.gitbook.io/mantis/" target="_blank">
+                    <Link style={{ textDecoration: 'none' }} href="https://codedthemes.gitbook.io/rentinel/" target="_blank">
                       <ListItemButton component="span">
                         <ListItemIcon>
                           <LineOutlined />
@@ -234,7 +234,7 @@ const Header = ({ handleDrawerOpen, layout = 'landing', ...others }) => {
                     </Link>
                     <Link
                       style={{ textDecoration: 'none' }}
-                      href="https://mui.com/store/items/mantis-react-admin-dashboard-template/"
+                      href="https://mui.com/store/items/rentinel-react-admin-dashboard-template/"
                       target="_blank"
                     >
                       <ListItemButton component="span">

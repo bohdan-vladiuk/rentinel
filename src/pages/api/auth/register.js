@@ -1,4 +1,4 @@
-import createHandler from 'middleware';
+import createHandler from 'services';
 import User from 'models/user';
 
 const bcrypt = require('bcryptjs');
