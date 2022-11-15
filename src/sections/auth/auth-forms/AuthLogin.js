@@ -1,10 +1,10 @@
 import React from 'react';
 
 // next
-import { signIn } from 'next-auth/react';
+import useAuth from 'hooks/useAuth';
+import { useRouter } from 'next/router';
 
 // material-ui
-
 import { Button, FormHelperText, Grid, InputAdornment, InputLabel, OutlinedInput, Stack, Typography } from '@mui/material';
 
 // third party
@@ -20,6 +20,9 @@ import AnimateButton from 'components/@extended/AnimateButton';
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 
 const AuthLogin = () => {
+  const router = useRouter();
+  const { signIn } = useAuth();
+
   const [capsWarning, setCapsWarning] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => {
@@ -50,20 +53,17 @@ const AuthLogin = () => {
           email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
           password: Yup.string().max(255).required('Password is required')
         })}
-        onSubmit={(values, { setErrors, setSubmitting }) => {
-          signIn('login', {
-            redirect: false,
-            email: values.email,
-            password: values.password,
-            callbackUrl: DEFAULT_PATH
-          }).then((res) => {
-            if (res?.error) {
-              setErrors({ submit: res.error });
-              setSubmitting(false);
-            } else {
-              setSubmitting(false);
-            }
-          });
+        onSubmit={async (values, { setErrors, setSubmitting, setStatus }) => {
+          try {
+            await signIn(values);
+            router.push(DEFAULT_PATH);
+          } catch (error) {
+            const message = error.message || 'Something went wrong';
+
+            setStatus({ success: false });
+            setErrors({ submit: message });
+            setSubmitting(false);
+          }
         }}
       >
         {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
@@ -98,7 +98,7 @@ const AuthLogin = () => {
                     fullWidth
                     color={capsWarning ? 'warning' : 'primary'}
                     error={Boolean(touched.password && errors.password)}
-                    id="-password-login"
+                    id="password-login"
                     type={showPassword ? 'text' : 'password'}
                     value={values.password}
                     name="password"

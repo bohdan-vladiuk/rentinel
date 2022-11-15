@@ -35,10 +35,12 @@ export const CreateProperty = () => (
     })}
     onSubmit={(values, { setErrors, setSubmitting }) => {
       propertyService.create(values).then((res) => {
-        if (res?.error) {
-          setErrors({ submit: res.error });
-          setSubmitting(false);
+        if (res.status) {
+          alert(res.data);
+        } else {
+          setErrors({ submit: res.data });
         }
+        setSubmitting(false);
       });
     }}
   >
@@ -253,7 +255,7 @@ export const CreateProperty = () => (
             )}
             <Grid item xs={12}>
               <AnimateButton>
-                <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
+                <Button disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
                   Create Propoerty
                 </Button>
               </AnimateButton>

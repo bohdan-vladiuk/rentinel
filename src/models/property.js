@@ -1,53 +1,53 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema } from 'mongoose';
 
-const MODEL_NAME = "Property";
+const MODEL_NAME = 'Property';
 
 const schema = new Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "user",
+      ref: 'user',
+      required: true
     },
     address1: {
       type: String,
-      required: true,
+      required: true
     },
     address2: {
-      type: String,
+      type: String
     },
     city: {
       type: String,
-      required: true,
+      required: true
     },
     country: {
       type: String,
-      required: true,
+      required: true
     },
     zipcode: {
       type: String,
-      required: true,
+      required: true
     },
     deposit: {
       type: Number,
-      required: true,
+      required: true
     },
     rentAmount: {
       type: Number,
-      required: true,
+      required: true
     },
     startDate: {
       type: Date,
-      require: true,
+      require: true
     },
     endDate: {
       type: Date,
-      required: true,
-    },
+      required: true
+    }
   },
   {
-    timestamps: true,
+    timestamps: true
   }
 );
 
-export default mongoose.models[MODEL_NAME] ||
-  mongoose.model(MODEL_NAME, schema, "property");
+export default mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema, 'property');

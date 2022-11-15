@@ -15,8 +15,6 @@ import MainCard from '../MainCard';
 // assets
 import { ApartmentOutlined, HomeOutlined, HomeFilled } from '@ant-design/icons';
 
-// ==============================|| BREADCRUMBS ||============================== //
-
 const Breadcrumbs = ({
   card,
   divider = true,
@@ -44,11 +42,6 @@ const Breadcrumbs = ({
   };
 
   let currentPath = document.location.pathname;
-
-  // only used for component demo breadcrumbs
-  if (currentPath === '/components-overview/breadcrumbs') {
-    currentPath = '/dashboard/analytics';
-  }
 
   // set active item state
   const getCollapse = (menu) => {

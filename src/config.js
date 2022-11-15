@@ -21,7 +21,6 @@ export const UserRole = {
 
 const config = {
   fontFamily: `'Public Sans', sans-serif`,
-  i18n: 'en',
   miniDrawer: false,
   container: true,
   mode: 'light',

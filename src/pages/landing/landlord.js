@@ -12,7 +12,7 @@ import { Grid } from '@mui/material';
 const LandlordPage = () => (
   <Page title="Landlord Page">
     <Grid container spacing={2}>
-      <Grid item xs={6}>
+      <Grid item xs={12} md={6}>
         <MainCard title="Create Property">
           <CreateProperty />
         </MainCard>

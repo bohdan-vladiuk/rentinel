@@ -27,13 +27,13 @@ handler.post(async (req, res) => {
     });
 
     await property.save();
-
     return res.status(200).json({
-      status: true,
       message: 'Property created.'
     });
   } catch (error) {
-    return res.status(500).json(error);
+    return res.status(500).json({
+      message: 'Internal server error'
+    });
   }
 });
 

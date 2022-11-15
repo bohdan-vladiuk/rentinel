@@ -1,22 +1,21 @@
 import PropTypes from 'prop-types';
 import { lazy, Suspense } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
 
 // material-ui
 import { styled } from '@mui/material/styles';
 import LinearProgress from '@mui/material/LinearProgress';
-// import { Container, Toolbar } from '@mui/material';
 
 // project import
-// import ComponentLayout from './ComponentLayout';
 import MainLayout from './MainLayout';
+import Header from './Header';
 import AuthGuard from 'utils/route-guard/AuthGuard';
 import GuestGuard from 'utils/route-guard/GuestGuard';
 
 // project import - store
-import { openComponentDrawer } from 'store/reducers/menu';
+// import { openComponentDrawer } from 'store/reducers/menu';
 
-const Header = lazy(() => import('./Header'));
+// const Header = lazy(() => import('./Header'));
 
 // ==============================|| Loader ||============================== //
 
@@ -37,40 +36,19 @@ const Loader = () => (
   </LoaderWrapper>
 );
 
-// ==============================|| LAYOUTS - STRUCTURE ||============================== //
-
 export default function Layout({ variant = 'main', children }) {
-  const dispatch = useDispatch();
-
-  const menu = useSelector((state) => state.menu);
-  const { componentDrawerOpen } = menu;
-
-  const handleDrawerOpen = () => {
-    dispatch(openComponentDrawer({ componentDrawerOpen: !componentDrawerOpen }));
-  };
-
-  if (variant === 'landing' || variant === 'simple' || variant === 'component') {
+  if (variant === 'landing' || variant === 'simple') {
     return (
-      <Suspense fallback={<Loader />}>
+      <>
         <Header layout={variant} />
         {children}
-      </Suspense>
+      </>
+      // <Suspense fallback={<Loader />}>
+      //   <Header layout={variant} />
+      //   {children}
+      // </Suspense>
     );
   }
-
-  // if (variant === 'component') {
-  //   return (
-  //     <Suspense fallback={<Loader />}>
-  //       <Container maxWidth="lg" sx={{ px: { xs: 0, sm: 2 } }}>
-  //         <Header handleDrawerOpen={handleDrawerOpen} layout="component" />
-  //         <Toolbar sx={{ my: 2 }} />
-  //         <ComponentLayout handleDrawerOpen={handleDrawerOpen} componentDrawerOpen={componentDrawerOpen}>
-  //           {children}
-  //         </ComponentLayout>
-  //       </Container>
-  //     </Suspense>
-  //   );
-  // }
 
   if (variant === 'blank') {
     return children;

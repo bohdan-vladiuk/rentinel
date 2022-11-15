@@ -10,8 +10,6 @@ import Page from 'components/Page';
 import AuthWrapper from 'sections/auth/AuthWrapper';
 import FirebaseRegister from 'sections/auth/auth-forms/AuthRegister';
 
-// ================================|| REGISTER ||================================ //
-
 const Register = () => (
   <Page title="Register">
     <AuthWrapper>
@@ -35,7 +33,7 @@ const Register = () => (
 );
 
 Register.getLayout = function getLayout(page) {
-  return <Layout variant="blank">{page}</Layout>;
+  return <Layout variant="auth">{page}</Layout>;
 };
 
 export default Register;

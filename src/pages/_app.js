@@ -2,15 +2,13 @@ import PropTypes from 'prop-types';
 
 // scroll bar
 import 'simplebar/src/simplebar.css';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+// import 'slick-carousel/slick/slick.css';
+// import 'slick-carousel/slick/slick-theme.css';
 import 'styles/react-table.css';
-
-// next
-import { SessionProvider } from 'next-auth/react';
 
 // third-party
 import { Provider as ReduxProvider } from 'react-redux';
+import { AuthProvider } from 'contexts/JWTContext';
 
 import { store } from 'store';
 import ThemeCustomization from 'themes';
@@ -21,9 +19,7 @@ export default function App({ Component, pageProps }) {
   return (
     <ReduxProvider store={store}>
       <ThemeCustomization>
-        <SessionProvider session={pageProps.session} refetchInterval={0}>
-          {getLayout(<Component {...pageProps} />)}
-        </SessionProvider>
+        <AuthProvider>{getLayout(<Component {...pageProps} />)}</AuthProvider>
       </ThemeCustomization>
     </ReduxProvider>
   );

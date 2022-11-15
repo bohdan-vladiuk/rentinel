@@ -1,42 +1,21 @@
-import PropTypes from 'prop-types';
-import { useEffect } from 'react';
-
-// next
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { useSession } from 'next-auth/react';
 
-// project import
+import useAuth from 'hooks/useAuth';
 import { DEFAULT_PATH } from 'config';
 
-// types
-import Loader from 'components/Loader';
-
-// ==============================|| GUEST GUARD ||============================== //
-
-const GuestGuard = ({ children }) => {
-  const { data: session, status } = useSession();
-  const { push } = useRouter();
+// For routes that can only be accessed by authenticated users
+function GuestGuard({ children }) {
+  const { isAuthenticated, isInitialized } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch('/api/auth/protected');
-      const json = await res.json();
-      if (json.protected) {
-        push(DEFAULT_PATH);
-      }
-    };
-    fetchData();
+    if (isInitialized && isAuthenticated) {
+      router.push(DEFAULT_PATH);
+    }
+  }, [isInitialized, isAuthenticated, router]);
 
-    // eslint-disable-next-line
-  }, [session]);
-
-  if (status === 'loading' || session?.user) return <Loader />;
-
-  return children;
-};
-
-GuestGuard.propTypes = {
-  children: PropTypes.node
-};
+  return isInitialized && !isAuthenticated ? <React.Fragment>{children}</React.Fragment> : <React.Fragment />;
+}
 
 export default GuestGuard;

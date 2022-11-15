@@ -1,8 +1,5 @@
 import { useRef, useState } from 'react';
 
-// next
-import { useSession, signOut } from 'next-auth/react';
-
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import {
@@ -24,19 +21,17 @@ import {
 // project import
 import Avatar from 'components/@extended/Avatar';
 import Transitions from 'components/@extended/Transitions';
-import useUser from 'hooks/useUser';
+import useAuth from 'hooks/useAuth';
 
 // assets
 import { LogoutOutlined } from '@ant-design/icons';
 
 const Profile = () => {
   const theme = useTheme();
-  const user = useUser();
-
-  const { data: session } = useSession();
+  const { user, signOut } = useAuth();
 
   const handleLogout = () => {
-    signOut({ redirect: false });
+    signOut();
   };
 
   const anchorRef = useRef(null);

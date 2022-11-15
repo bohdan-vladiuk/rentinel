@@ -9,7 +9,6 @@ import useLocalStorage from 'hooks/useLocalStorage';
 const initialState = {
   ...defaultConfig,
   onChangeContainer: () => {},
-  onChangeLocalization: () => {},
   onChangeMode: () => {},
   onChangePresetColor: () => {},
   onChangeDirection: () => {},
@@ -28,13 +27,6 @@ function ConfigProvider({ children }) {
     setConfig({
       ...config,
       container: !config.container
-    });
-  };
-
-  const onChangeLocalization = (lang) => {
-    setConfig({
-      ...config,
-      i18n: lang
     });
   };
 
@@ -78,7 +70,6 @@ function ConfigProvider({ children }) {
       value={{
         ...config,
         onChangeContainer,
-        onChangeLocalization,
         onChangeMode,
         onChangePresetColor,
         onChangeDirection,

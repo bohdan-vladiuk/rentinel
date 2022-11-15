@@ -33,7 +33,7 @@ const Login = () => (
 );
 
 Login.getLayout = function getLayout(page) {
-  return <Layout variant="blank">{page}</Layout>;
+  return <Layout variant="auth">{page}</Layout>;
 };
 
 export default Login;
