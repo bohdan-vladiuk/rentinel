@@ -1,7 +1,7 @@
 import React from "react";
-import Layout from "../../components/Layout";
+import Layout from "components/Layout";
 
-function Adjustor() {
+function Adjuster() {
   return (
     <Layout role={3}>
       <div className="container-fluid">
@@ -15,4 +15,4 @@ function Adjustor() {
   );
 }
 
-export default Adjustor;
+export default Adjuster;

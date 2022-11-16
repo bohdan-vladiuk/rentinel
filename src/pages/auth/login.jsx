@@ -4,11 +4,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
 import Link from "next/link";
-import Layout from "../../components/account/Layout";
-import { userService, alertService } from "../../services";
+import Layout from "components/auth/Layout";
+
+import useAuth from "hooks/useAuth";
 
 function Login() {
   const router = useRouter();
+  const { signIn, user } = useAuth();
 
   // form validation rules
   const validationSchema = Yup.object().shape({
@@ -21,20 +23,14 @@ function Login() {
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors } = formState;
 
-  function onSubmit({ email, password }) {
-    const landing = ["", "tenant", "landlord", "adjustor"];
-
-    return userService
-      .login(email, password)
-      .then(({ data }) => {
-        const returnUrl = `/landing/${landing[data.role]}`;
-        // get return url from query parameters or default to '/'
-        // const returnUrl = router.query.returnUrl || "/";
-        router.push(returnUrl);
-      })
-      .catch((err) => console.log(err));
-    // .catch(alertService.error)
-  }
+  const onSubmit = async (values) => {
+    try {
+      await signIn(values);
+      router.push("/landing");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Layout>
@@ -66,7 +62,7 @@ function Login() {
             </div>
             <div className="mt-2 d-flex w-100">
               <button className="btn btn-primary me-2">Log In</button>
-              <Link href="/account/register" className="btn btn-danger">
+              <Link href="/auth/register" className="btn btn-danger">
                 Register
               </Link>
               <Link href="/" className="btn btn-secondary ms-auto">

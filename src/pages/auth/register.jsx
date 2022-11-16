@@ -4,11 +4,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
 import Link from "next/link";
-import Layout from "../../components/account/Layout";
-import { userService, alertService } from "../../services";
+import Layout from "components/auth/Layout";
+import useAuth from "hooks/useAuth";
 
 function Register() {
   const router = useRouter();
+  const { signUp, user } = useAuth();
 
   const validationSchema = Yup.object().shape({
     role: Yup.string().required("User Role is required"),
@@ -27,16 +28,13 @@ function Register() {
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors } = formState;
 
-  const onSubmit = (user) => {
-    return userService
-      .register(user)
-      .then(() => {
-        alertService.success("Registration successful", {
-          keepAfterRouteChange: true,
-        });
-        router.push("login");
-      })
-      .catch(alertService.error);
+  const onSubmit = async (values) => {
+    try {
+      await signUp(values);
+      router.push("/landing");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -53,23 +51,10 @@ function Register() {
                   type="radio"
                   name="role"
                   id="userRole1"
-                  value="1"
+                  value="0"
                   {...register("role")}
                 />
                 <label className="form-check-label" htmlFor="userRole1">
-                  Tenant
-                </label>
-              </div>
-              <div className="form-check form-check-inline">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="role"
-                  id="userRole2"
-                  value="2"
-                  {...register("role")}
-                />
-                <label className="form-check-label" htmlFor="userRole2">
                   Landlord
                 </label>
               </div>
@@ -78,8 +63,21 @@ function Register() {
                   className="form-check-input"
                   type="radio"
                   name="role"
+                  id="userRole2"
+                  value="1"
+                  {...register("role")}
+                />
+                <label className="form-check-label" htmlFor="userRole2">
+                  Tenant
+                </label>
+              </div>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="role"
                   id="userRole3"
-                  value="3"
+                  value="2"
                   {...register("role")}
                 />
                 <label className="form-check-label" htmlFor="userRole3">
@@ -208,7 +206,7 @@ function Register() {
             </div>
             <div className="mt-2">
               <button className="btn btn-primary me-2">Register</button>
-              <Link href="/account/login" className="btn btn-secondary">
+              <Link href="/auth/login" className="btn btn-secondary">
                 Cancel
               </Link>
             </div>

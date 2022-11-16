@@ -1,7 +1,7 @@
 import React from "react";
-import Layout from "../../components/Layout";
-import CreateProperty from "../../components/property/CreateProperty";
-import PropertyList from "../../components/property/PropertyList";
+import Layout from "components/Layout";
+import CreateProperty from "components/property/CreateProperty";
+import PropertyList from "components/property/PropertyList";
 
 function Landlord() {
   return (

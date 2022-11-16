@@ -1,5 +1,5 @@
 import Router from "next/router";
-import axios from "axios";
+import axios from "./axios";
 
 const baseUrl = "/api/user";
 
@@ -13,11 +13,14 @@ export const userService = {
   delete: _delete,
 };
 
-function login(email, password) {
-  return axios.post(`${baseUrl}/login`, { email, password }).then((user) => {
+async function login(email, password) {
+  try {
+    const { token, user } = await axios.post(`${baseUrl}/login`, {
+      email,
+      password,
+    });
     localStorage.setItem("user", JSON.stringify(user));
-    return user;
-  });
+  } catch (error) {}
 }
 
 function logout() {

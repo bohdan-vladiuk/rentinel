@@ -39,13 +39,14 @@ const schema = new Schema(
       type: Number,
       required: true,
     },
+    wallet: {
+      type: String,
+    },
     startDate: {
       type: Date,
-      require: true,
     },
     endDate: {
       type: Date,
-      required: true,
     },
   },
   {

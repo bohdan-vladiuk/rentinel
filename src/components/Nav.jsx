@@ -1,13 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import { userService } from "../services";
+import useAuth from "hooks/useAuth";
 
-export default Nav;
-
-function Nav(props) {
-  const logout = () => {
-    return userService.logout();
-  };
+function Nav() {
+  const { isAuthenticated, signOut } = useAuth();
 
   return (
     <nav className="navbar navbar-default navbar-expand bg-light">
@@ -23,9 +19,9 @@ function Nav(props) {
           </Link>
         </div>
         <div className="navbar-nav">
-          {props.role ? (
+          {isAuthenticated ? (
             <a
-              onClick={logout}
+              onClick={signOut}
               className="nav-item nav-link"
               style={{ cursor: "pointer" }}
             >
@@ -33,10 +29,10 @@ function Nav(props) {
             </a>
           ) : (
             <>
-              <Link href="account/login" className="nav-item nav-link">
+              <Link href="auth/login" className="nav-item nav-link">
                 LogIn
               </Link>
-              <Link href="account/register" className="nav-item nav-link">
+              <Link href="auth/register" className="nav-item nav-link">
                 Register
               </Link>
             </>
@@ -46,3 +42,5 @@ function Nav(props) {
     </nav>
   );
 }
+
+export default Nav;

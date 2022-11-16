@@ -4,15 +4,15 @@ import { Form } from "react-bootstrap";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
-import { useDispatch } from "../../store";
-import { addProperty } from "../../store/reducers/property";
+import { useDispatch } from "store";
+import { addProperty } from "store/reducers/property";
+import useAuth from "hooks/useAuth";
 
 function CreateProperty() {
   const dispatch = useDispatch();
-  const router = useRouter();
+  const { user } = useAuth();
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().required("Email is required"),
     address1: Yup.string().required("Address is required"),
     state: Yup.string().required("State is required"),
     city: Yup.string().required("City is required"),
@@ -31,6 +31,7 @@ function CreateProperty() {
   const { errors } = formState;
 
   const onSubmit = (property) => {
+    property.email = user.email;
     dispatch(addProperty(property));
   };
 
@@ -46,10 +47,10 @@ function CreateProperty() {
                 <input
                   name="email"
                   type="email"
-                  {...register("email")}
-                  className={`form-control ${errors.email ? "is-invalid" : ""}`}
+                  value={user.email}
+                  className="form-control"
+                  disabled
                 />
-                <div className="invalid-feedback">{errors.email?.message}</div>
               </div>
             </div>
             <div className="col-md-4">
