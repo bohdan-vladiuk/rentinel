@@ -3,13 +3,18 @@ import { useForm } from "react-hook-form";
 import { Form } from "react-bootstrap";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import { propertyService, alertService } from "../../services";
+
+import { useDispatch } from "../../store";
+import { addProperty } from "../../store/reducers/property";
 
 function CreateProperty() {
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const validationSchema = Yup.object().shape({
+    email: Yup.string().required("Email is required"),
     address1: Yup.string().required("Address is required"),
+    state: Yup.string().required("State is required"),
     city: Yup.string().required("City is required"),
     country: Yup.string().required("Country is required"),
     zipcode: Yup.string().required("Zip Code is required"),
@@ -26,16 +31,7 @@ function CreateProperty() {
   const { errors } = formState;
 
   const onSubmit = (property) => {
-    return propertyService
-      .create(property)
-      .then(() => {
-        alert("Property created successfully.");
-        // alertService.success("Property created successfully ", {
-        //   keepAfterRouteChange: true,
-        // });
-        // router.push("login");
-      })
-      .catch(alertService.error);
+    dispatch(addProperty(property));
   };
 
   return (
@@ -44,7 +40,19 @@ function CreateProperty() {
       <div className="card-body">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-4">
+              <div className="form-group">
+                <label className="mt-2">Landlord Email</label>
+                <input
+                  name="email"
+                  type="email"
+                  {...register("email")}
+                  className={`form-control ${errors.email ? "is-invalid" : ""}`}
+                />
+                <div className="invalid-feedback">{errors.email?.message}</div>
+              </div>
+            </div>
+            <div className="col-md-4">
               <div className="form-group">
                 <label className="mt-2">Address 1</label>
                 <input
@@ -60,7 +68,7 @@ function CreateProperty() {
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="form-group">
                 <label className="mt-2">Address 2</label>
                 <input
@@ -73,6 +81,18 @@ function CreateProperty() {
             </div>
           </div>
           <div className="row">
+            <div className="col-md-4">
+              <div className="form-group">
+                <label className="mt-2">State</label>
+                <input
+                  name="state"
+                  type="text"
+                  {...register("state")}
+                  className={`form-control ${errors.state ? "is-invalid" : ""}`}
+                />
+                <div className="invalid-feedback">{errors.state?.message}</div>
+              </div>
+            </div>
             <div className="col-md-4">
               <div className="form-group">
                 <label className="mt-2">City</label>
@@ -101,6 +121,8 @@ function CreateProperty() {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="row">
             <div className="col-md-4">
               <div className="form-group">
                 <label className="mt-2">Zip Code</label>
@@ -117,9 +139,7 @@ function CreateProperty() {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="form-group">
                 <label className="mt-2">Deposit</label>
                 <input
@@ -135,7 +155,7 @@ function CreateProperty() {
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="form-group">
                 <label className="mt-2">Rent Amount</label>
                 <input
@@ -151,6 +171,9 @@ function CreateProperty() {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="row mt-3">
+            <h5>Availability From</h5>
           </div>
           <div className="row">
             <div className="col-md-6">

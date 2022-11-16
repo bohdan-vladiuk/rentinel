@@ -46,4 +46,4 @@ const schema = new Schema(
 );
 
 export default mongoose.models[MODEL_NAME] ||
-  mongoose.model(MODEL_NAME, schema, "users");
+  mongoose.model(MODEL_NAME, schema, "users01");

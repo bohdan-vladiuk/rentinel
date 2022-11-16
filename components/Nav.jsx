@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { userService } from "../services";
 
 export default Nav;
@@ -13,7 +14,12 @@ function Nav(props) {
       <div className="container-fluid">
         <div className="navbar-nav me-auto">
           <Link href="/" className="nav-item nav-link">
-            Home
+            <Image
+              src="/image/logo.svg"
+              alt="Rentinel"
+              width={150}
+              height={26}
+            />
           </Link>
         </div>
         <div className="navbar-nav">

@@ -15,7 +15,16 @@ function create(property) {
   return axios.post(`${baseUrl}`, property);
 }
 
-function getAll() {}
+async function getAll() {
+  try {
+    const res = await axios.get(`${baseUrl}`);
+    if (res) {
+      return { status: true, data: res.data };
+    }
+  } catch (error) {
+    return { status: false, data: [] };
+  }
+}
 
 function getById(id) {}
 
