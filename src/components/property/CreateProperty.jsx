@@ -57,7 +57,7 @@ function CreateProperty() {
               <div className="form-group">
                 <label className="mt-2">Address 1</label>
                 <input
-                  name="address"
+                  name="address1"
                   type="text"
                   {...register("address1")}
                   className={`form-control ${
@@ -73,7 +73,7 @@ function CreateProperty() {
               <div className="form-group">
                 <label className="mt-2">Address 2</label>
                 <input
-                  name="city"
+                  name="address2"
                   type="text"
                   {...register("address2")}
                   className={`form-control`}

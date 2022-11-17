@@ -1,5 +1,5 @@
-import createHandler from "../../../middleware";
-import Property from "../../../models/property";
+import createHandler from "middleware";
+import Property from "models/property";
 
 const handler = createHandler();
 

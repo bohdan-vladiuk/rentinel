@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "../../store";
-import { getProperties } from "../../store/reducers/property";
+import { useDispatch, useSelector } from "store";
+import { getProperties } from "store/reducers/property";
 
 function PropertyList() {
   const dispatch = useDispatch();

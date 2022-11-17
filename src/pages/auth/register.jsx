@@ -133,11 +133,35 @@ function Register() {
             <div className="row">
               <div className="col-md-6">
                 <div className="form-group">
-                  <label className="mt-2">Address</label>
+                  <label className="mt-2">Address 1</label>
                   <input
-                    name="address"
+                    name="address1"
                     type="text"
-                    {...register("address")}
+                    {...register("address1")}
+                    className={`form-control`}
+                  />
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="form-group">
+                  <label className="mt-2">Address 2</label>
+                  <input
+                    name="address2"
+                    type="text"
+                    {...register("address2")}
+                    className={`form-control`}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-6">
+                <div className="form-group">
+                  <label className="mt-2">State</label>
+                  <input
+                    name="state"
+                    type="text"
+                    {...register("state")}
                     className={`form-control`}
                   />
                 </div>

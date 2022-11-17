@@ -1,4 +1,3 @@
-// import Router from "next/router";
 import axios from "./axios";
 
 const baseUrl = "/api/property";

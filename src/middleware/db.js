@@ -1,9 +1,12 @@
 import mongoose from "mongoose";
 
+// const MONGO_DB_URI = process.env.DB_LOCAL_URI;
+const MONGO_DB_URI = process.env.DB_ATLAS_URI;
+
 export async function dbConnect() {
   if (mongoose.connection.readyState >= 1) return;
 
-  return mongoose.connect(process.env.DB_LOCAL_URI, {
+  return mongoose.connect(MONGO_DB_URI, {
     autoCreate: true,
     autoIndex: true,
     useUnifiedTopology: true,

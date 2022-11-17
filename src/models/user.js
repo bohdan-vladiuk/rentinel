@@ -20,7 +20,13 @@ const schema = new Schema(
       type: String,
       required: true,
     },
-    address: {
+    address1: {
+      type: String,
+    },
+    address2: {
+      type: String,
+    },
+    state: {
       type: String,
     },
     city: {
