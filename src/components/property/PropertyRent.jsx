@@ -9,9 +9,9 @@ import useAuth from "hooks/useAuth";
 
 function PropertyRent() {
   const dispatch = useDispatch();
+  const { properties } = useSelector((state) => state.property);
   const { user } = useAuth();
 
-  const { properties } = useSelector((state) => state.property);
   const [show, setShow] = useState(false);
   const [property, setProperty] = useState({});
   const { register, handleSubmit, reset } = useForm({
@@ -46,43 +46,39 @@ function PropertyRent() {
           <div className="card mb-3" key={index}>
             <h5 className="card-header d-flex justify-content-between">
               <div>{prop._id}</div>
-              <button
-                className="btn btn-primary pull-right"
-                onClick={() => handleShow(prop)}
-              >
-                Rent
-              </button>
             </h5>
             <div className="card-body">
-              <div className="row">
-                <div className="col-md-4 text-right">
-                  <b>Owner:</b>
-                </div>
-                <div className="col-md-8">{prop.email}</div>
+              <div>
+                <b>Owner:</b> {prop.email}
               </div>
               <div className="row">
-                <div className="col-md-4 text-right">
-                  <b>Deposit:</b>
+                <div className="col-md-10">
+                  <div className="row">
+                    <div className="col-sm-6">
+                      <b>Deposit:</b> {prop.deposit}
+                    </div>
+                    <div className="col-sm-6">
+                      <b>Rent Amount:</b> {prop.rentAmount}
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-sm-6">
+                      <b>Start Date:</b>{" "}
+                      {String(prop.startDate).substring(0, 10)}
+                    </div>
+                    <div className="col-sm-6">
+                      <b>End Date:</b> {String(prop.endDate).substring(0, 10)}
+                    </div>
+                  </div>
                 </div>
-                <div className="col-md-8">{prop.deposit}</div>
-              </div>
-              <div className="row">
-                <div className="col-md-4 text-right">
-                  <b>Rent Amount:</b>
+                <div className="col-md-2">
+                  <button
+                    className="btn btn-primary w-100"
+                    onClick={() => handleShow(prop)}
+                  >
+                    Rent
+                  </button>
                 </div>
-                <div className="col-md-8">{prop.rentAmount}</div>
-              </div>
-              <div className="row">
-                <div className="col-md-4 text-right">
-                  <b>Start Date:</b>
-                </div>
-                <div className="col-md-8">{prop.startDate}</div>
-              </div>
-              <div className="row">
-                <div className="col-md-4 text-right">
-                  <b>End Date:</b>
-                </div>
-                <div className="col-md-8">{prop.endDate}</div>
               </div>
             </div>
           </div>

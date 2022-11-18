@@ -1,11 +1,11 @@
 import React from "react";
 import Layout from "components/Layout";
 import CreateProperty from "components/property/CreateProperty";
-import PropertyList from "components/property/PropertyList";
+import ContractList from "components/property/ContractList";
 
 function Landlord() {
   return (
-    <Layout role={2}>
+    <Layout>
       <div className="container-fluid">
         <h2 className="row text-center">
           <p>
@@ -17,7 +17,7 @@ function Landlord() {
             <CreateProperty />
           </div>
           <div className="col-md-5 ps-1">
-            <PropertyList />
+            <ContractList />
           </div>
         </div>
       </div>

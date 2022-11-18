@@ -242,3 +242,9 @@ function Register() {
 }
 
 export default Register;
+
+export async function getServerSideProps() {
+  return {
+    props: {},
+  };
+}

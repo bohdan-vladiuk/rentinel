@@ -1,15 +1,16 @@
-import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Form } from "react-bootstrap";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
-import { useDispatch } from "store";
-import { addProperty } from "store/reducers/property";
+import { useDispatch, useSelector } from "store";
+import { getProperties, addProperty } from "store/reducers/property";
 import useAuth from "hooks/useAuth";
 
 function CreateProperty() {
   const dispatch = useDispatch();
+  const { properties } = useSelector((state) => state.property);
   const { user } = useAuth();
 
   const validationSchema = Yup.object().shape({
@@ -35,9 +36,13 @@ function CreateProperty() {
     dispatch(addProperty(property));
   };
 
+  useEffect(() => {
+    dispatch(getProperties());
+  }, []);
+
   return (
     <div className="card">
-      <h4 className="card-header">Property Create</h4>
+      <h5 className="card-header">Property Create</h5>
       <div className="card-body">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="row">
@@ -174,7 +179,7 @@ function CreateProperty() {
             </div>
           </div>
           <div className="row mt-3">
-            <h5>Availability From</h5>
+            <h6>Availability From</h6>
           </div>
           <div className="row">
             <div className="col-md-6">
@@ -203,6 +208,36 @@ function CreateProperty() {
           </div>
         </form>
       </div>
+      <ul className="list-group list-group-flush">
+        {properties.map((prop, index) => (
+          <li className="list-group-item" key={index}>
+            <div className="row">
+              <div className="col-md-6">
+                <b>PropertyId:</b> {prop._id}
+              </div>
+              <div className="col-md-6">
+                <b>Owner:</b> {prop.email}
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-6">
+                <b>Deposit:</b> {prop.deposit}
+              </div>
+              <div className="col-md-6">
+                <b>Rent Amount:</b> {prop.rentAmount}
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-6">
+                <b>Start Date:</b> {String(prop.startDate).substring(0, 10)}
+              </div>
+              <div className="col-md-6">
+                <b>End Date:</b> {String(prop.endDate).substring(0, 10)}
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

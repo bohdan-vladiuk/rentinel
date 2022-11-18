@@ -1,14 +1,11 @@
-import { useEffect } from "react";
 import Nav from "./Nav";
 
 export default Layout;
 
-function Layout({ role, children }) {
-  useEffect(() => {}, []);
-
+function Layout({ children }) {
   return (
     <>
-      <Nav role={role} />
+      <Nav />
       <div>{children}</div>
     </>
   );

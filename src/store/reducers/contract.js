@@ -35,7 +35,6 @@ export function addContract(contract) {
   return async () => {
     try {
       const response = await axios.post("/api/contract", contract);
-      console.log(response.data);
       dispatch(slice.actions.addContractSuccess(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
