@@ -6,7 +6,7 @@ const schema = new Schema(
   {
     role: {
       type: Number,
-      default: 0,
+      default: 1,
     },
     email: {
       type: String,

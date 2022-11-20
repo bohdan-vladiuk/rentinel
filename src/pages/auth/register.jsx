@@ -6,10 +6,11 @@ import * as Yup from "yup";
 import Link from "next/link";
 import Layout from "components/auth/Layout";
 import useAuth from "hooks/useAuth";
+import { UserRole } from "services/config";
 
 function Register() {
   const router = useRouter();
-  const { signUp, user } = useAuth();
+  const { signUp } = useAuth();
 
   const validationSchema = Yup.object().shape({
     role: Yup.string().required("User Role is required"),
@@ -51,7 +52,7 @@ function Register() {
                   type="radio"
                   name="role"
                   id="userRole1"
-                  value="0"
+                  value={UserRole.LANDLORD}
                   {...register("role")}
                 />
                 <label className="form-check-label" htmlFor="userRole1">
@@ -64,7 +65,7 @@ function Register() {
                   type="radio"
                   name="role"
                   id="userRole2"
-                  value="1"
+                  value={UserRole.TENANT}
                   {...register("role")}
                 />
                 <label className="form-check-label" htmlFor="userRole2">
@@ -77,7 +78,7 @@ function Register() {
                   type="radio"
                   name="role"
                   id="userRole3"
-                  value="2"
+                  value={UserRole.ADJUSTER}
                   {...register("role")}
                 />
                 <label className="form-check-label" htmlFor="userRole3">

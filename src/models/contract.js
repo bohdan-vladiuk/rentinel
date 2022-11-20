@@ -6,6 +6,7 @@ const schema = new Schema(
   {
     propertyId: {
       type: Schema.Types.ObjectId,
+      ref: "properties01",
       required: true,
     },
     tenantEmail: {

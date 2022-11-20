@@ -42,47 +42,52 @@ function PropertyRent() {
   return (
     <>
       <div className="container-fluid">
-        {properties.map((prop, index) => (
-          <div className="card mb-3" key={index}>
-            <h5 className="card-header d-flex justify-content-between">
-              <div>{prop._id}</div>
-            </h5>
-            <div className="card-body">
-              <div>
-                <b>Owner:</b> {prop.email}
-              </div>
-              <div className="row">
-                <div className="col-md-10">
-                  <div className="row">
-                    <div className="col-sm-6">
-                      <b>Deposit:</b> {prop.deposit}
+        <div className="card">
+          <h5 className="card-header">Property List</h5>
+          <ul className="list-group list-group-flush">
+            {properties.map((prop, index) => (
+              <li className="list-group-item" key={index}>
+                <div className="row">
+                  <div className="col-md-9">
+                    <div>
+                      <b>PropertyId:</b> {prop._id}
                     </div>
-                    <div className="col-sm-6">
-                      <b>Rent Amount:</b> {prop.rentAmount}
+                    <div>
+                      <b>Owner:</b> {prop.email}
+                    </div>
+                    <div className="row">
+                      <div className="col-md-6">
+                        <b>Deposit:</b> {prop.deposit}
+                      </div>
+                      <div className="col-md-6">
+                        <b>Rent Amount:</b> {prop.rentAmount}
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-6">
+                        <b>Start Date:</b>{" "}
+                        {prop.startDate &&
+                          String(prop.startDate).substring(0, 10)}
+                      </div>
+                      <div className="col-md-6">
+                        <b>End Date:</b>{" "}
+                        {prop.endDate && String(prop.endDate).substring(0, 10)}
+                      </div>
                     </div>
                   </div>
-                  <div className="row">
-                    <div className="col-sm-6">
-                      <b>Start Date:</b>{" "}
-                      {String(prop.startDate).substring(0, 10)}
-                    </div>
-                    <div className="col-sm-6">
-                      <b>End Date:</b> {String(prop.endDate).substring(0, 10)}
-                    </div>
+                  <div className="col-md-3">
+                    <button
+                      className="btn btn-primary w-100"
+                      onClick={() => handleShow(prop)}
+                    >
+                      Rent
+                    </button>
                   </div>
                 </div>
-                <div className="col-md-2">
-                  <button
-                    className="btn btn-primary w-100"
-                    onClick={() => handleShow(prop)}
-                  >
-                    Rent
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       <Modal show={show} onHide={handleClose}>

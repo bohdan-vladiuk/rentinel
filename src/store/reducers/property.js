@@ -25,6 +25,10 @@ const slice = createSlice({
     getPropertiesSuccess(state, action) {
       state.properties = action.payload;
     },
+
+    getUserPropertiesSuccess(state, action) {
+      state.properties = action.payload;
+    },
   },
 });
 
@@ -47,6 +51,17 @@ export function getProperties() {
     try {
       const response = await axios.get("/api/property");
       dispatch(slice.actions.getPropertiesSuccess(response.data));
+    } catch (error) {
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+}
+
+export function getUserProperties(email) {
+  return async () => {
+    try {
+      const response = await axios.get(`/api/property?email=${email}`);
+      dispatch(slice.actions.getUserPropertiesSuccess(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }

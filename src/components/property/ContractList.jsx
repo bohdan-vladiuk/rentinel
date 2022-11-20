@@ -3,9 +3,10 @@ import { useForm } from "react-hook-form";
 import { Button, Form, Modal, Stack } from "react-bootstrap";
 
 import { useDispatch, useSelector } from "store";
-import { getContracts } from "store/reducers/contract";
+import { getUserContracts } from "store/reducers/contract";
 import { addDispute, getDisputes } from "store/reducers/dispute";
 import useAuth from "hooks/useAuth";
+import { UserRole } from "services/config";
 
 function ContractList() {
   const dispatch = useDispatch();
@@ -55,7 +56,7 @@ function ContractList() {
   };
 
   useEffect(() => {
-    dispatch(getContracts());
+    dispatch(getUserContracts(user));
     dispatch(getDisputes());
   }, []);
 
@@ -90,7 +91,7 @@ function ContractList() {
                       {contractStatus[contract._id] === undefined ? (
                         <button
                           className="btn btn-primary w-100"
-                          disabled={Boolean(user.role)}
+                          disabled={user.role === UserRole.TENANT}
                           onClick={() => handleShow(contract)}
                         >
                           Dispute

@@ -27,7 +27,14 @@ handler.post(async (req, res) => {
 });
 
 handler.get(async (req, res) => {
-  const properties = await Property.find().sort("-createdAt");
+  const email = req.query?.email;
+  let properties;
+
+  if (email === undefined) {
+    properties = await Property.find().sort("-createdAt");
+  } else {
+    properties = await Property.find({ email }).sort("-createdAt");
+  }
   res.status(200).json(properties);
 });
 

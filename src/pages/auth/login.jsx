@@ -10,7 +10,7 @@ import useAuth from "hooks/useAuth";
 
 function Login() {
   const router = useRouter();
-  const { signIn, user } = useAuth();
+  const { signIn } = useAuth();
 
   // form validation rules
   const validationSchema = Yup.object().shape({
@@ -20,7 +20,7 @@ function Login() {
   const formOptions = { resolver: yupResolver(validationSchema) };
 
   // get functions to build form with useForm() hook
-  const { register, handleSubmit, formState } = useForm(formOptions);
+  const { register, handleSubmit, setError, formState } = useForm(formOptions);
   const { errors } = formState;
 
   const onSubmit = async (values) => {
@@ -28,7 +28,7 @@ function Login() {
       await signIn(values);
       router.push("/landing");
     } catch (error) {
-      console.log(error);
+      alert(error.message);
     }
   };
 

@@ -25,6 +25,10 @@ const slice = createSlice({
     getContractsSuccess(state, action) {
       state.contracts = action.payload;
     },
+
+    getUserContractsSuccess(state, action) {
+      state.contracts = action.payload;
+    },
   },
 });
 
@@ -47,6 +51,19 @@ export function getContracts() {
     try {
       const response = await axios.get("/api/contract");
       dispatch(slice.actions.getContractsSuccess(response.data));
+    } catch (error) {
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+}
+
+export function getUserContracts({ role, email }) {
+  return async () => {
+    try {
+      const response = await axios.get(
+        `/api/contract?role=${role}&email=${email}`
+      );
+      dispatch(slice.actions.getUserContractsSuccess(response.data));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }

@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
 import { useDispatch, useSelector } from "store";
-import { getProperties, addProperty } from "store/reducers/property";
+import { getUserProperties, addProperty } from "store/reducers/property";
 import useAuth from "hooks/useAuth";
 
 function CreateProperty() {
@@ -37,7 +37,7 @@ function CreateProperty() {
   };
 
   useEffect(() => {
-    dispatch(getProperties());
+    dispatch(getUserProperties(user.email));
   }, []);
 
   return (
@@ -229,10 +229,12 @@ function CreateProperty() {
             </div>
             <div className="row">
               <div className="col-md-6">
-                <b>Start Date:</b> {String(prop.startDate).substring(0, 10)}
+                <b>Start Date:</b>{" "}
+                {prop.startDate && String(prop.startDate).substring(0, 10)}
               </div>
               <div className="col-md-6">
-                <b>End Date:</b> {String(prop.endDate).substring(0, 10)}
+                <b>End Date:</b>{" "}
+                {prop.endDate && String(prop.endDate).substring(0, 10)}
               </div>
             </div>
           </li>
