@@ -11,7 +11,10 @@ handler.post(async (req, res) => {
   let user = {};
 
   try {
-    if (email === "admin" && password === "admin") {
+    if (
+      email === process.env.ADMIN_EMAIL &&
+      password === process.env.ADMIN_PASSWORD
+    ) {
       user = {
         id: "",
         role: UserRole.ADMIN,
