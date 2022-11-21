@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 export async function dbConnect() {
   if (mongoose.connection.readyState >= 1) return;
 
-  return mongoose.connect(process.env.DB_LOCAL_URI, {
+  return mongoose.connect(process.env.DB_ATLAS_URI, {
     autoCreate: true,
     autoIndex: true,
     useUnifiedTopology: true,

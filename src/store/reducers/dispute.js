@@ -40,8 +40,19 @@ export default slice.reducer;
 export function addDispute(dispute) {
   return async () => {
     try {
-      const response = await axios.post("/api/dispute", dispute);
-      dispatch(slice.actions.addDisputeSuccess(response.data));
+      const body = new FormData();
+      body.append("file", dispute.image[0]);
+      body.append("contractId", dispute.contractId);
+      body.append("claimerEmail", dispute.claimerEmail);
+      body.append("amount", dispute.amount);
+      body.append("description", dispute.description);
+
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body,
+      });
+      const data = await response.json();
+      dispatch(slice.actions.addDisputeSuccess(data));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }

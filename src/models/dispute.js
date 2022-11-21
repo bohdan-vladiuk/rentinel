@@ -27,6 +27,9 @@ const schema = new Schema(
       type: Number,
       default: 0,
     },
+    photo: {
+      type: String,
+    },
   },
   {
     timestamps: true,
